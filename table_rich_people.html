@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background: url(https://wallpaperaccess.com/full/825678.jpg) no-repeat center center/cover;
+            height: 100vh;
+        }
+
+        .birthdates {
+            width: 100%;
+            background-color: white;
+
+            border: 2px solid black;
+        }
+
+
+        td {
+            text-align: center;
+            padding: 1%;
+            font-family: sans-serif;
+        }
+
+        th {
+            padding: 1.5%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: x-large;
+        }
+
+        .birthdates_container {
+            padding: 2%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="birthdates_container">
+        <table class="birthdates">
+            <tr>
+                <th>Name</th>
+                <th>Upcoming Birthdate</th>
+                <th>Countdown</th>
+            </tr>
+            <tbody id="top_5_birthday_data">
+                <!-- <tr>
+                    <td>Elon Musk</td>
+                    <td>Jun 28</td>
+                    <td>live countdown</td>
+                </tr>
+                <tr>
+                    <td>Jeff Bezos</td>
+                    <td>Jan 12</td>
+                    <td>live countdown</td>
+                </tr>
+                <tr>
+                    <td>Bernard Arnault</td>
+                    <td>Mar 5</td>
+                    <td>live countdown</td>
+                </tr>
+                <tr>
+                    <td>Bill Gates</td>
+                    <td>Oct 28</td>
+                    <td>live countdown</td>
+                </tr>
+                <tr>
+                    <td>Mark Zuckerberg</td>
+                    <td>May 14</td>
+                    <td>live countdown</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let top_5_birthday_data = document.getElementById("top_5_birthday_data")
+
+        let current = new Date()
+
+        let rich_people_birthdays = [
+            { name: "Elon Musk", date: new Date(`June 28, ${current.getFullYear() + 1} 00:00:00`) },
+            { name: "Jeff Bezos", date: new Date(`January 12, ${current.getFullYear() + 1} 00:00:00`) },
+            { name: "Bernard Arnault", date: new Date(`March 5, ${current.getFullYear() + 1} 00:00:00`) },
+            { name: "Bill Gates", date: new Date(`October 28, ${current.getFullYear() + 1} 00:00:00`) }
+        ]
+
+        setInterval(() => {
+            top_5_birthday_data.innerHTML = ""
+            rich_people_birthdays.forEach(function (people) {
+                
+                let current = new Date()
+                // console.log()
+                let birthdate = people["date"]
+
+                let diff_btw_datetimes = birthdate - current;
+
+                let days = Math.floor(diff_btw_datetimes / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((diff_btw_datetimes % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((diff_btw_datetimes % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((diff_btw_datetimes % (1000 * 60)) / 1000);
+
+                top_5_birthday_data.innerHTML +=
+                `
+                <tr>
+                    <td>${people["name"]}</td>
+                    <td>${people["date"].toDateString()}</td>
+                    <td><span>${days}</span> days <span>${hours}</span> hours <span>${minutes}</span> mins <span>${seconds}</span> sec</td>
+                </tr>
+                `
+            })
+        }, 1000)
+    </script>
+</body>
+
+</html>
